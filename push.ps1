@@ -12,7 +12,8 @@ Write-Host "Committing with message: $Message" -ForegroundColor Cyan
 & $git commit -m $Message
 
 Write-Host "Pushing to remote..." -ForegroundColor Cyan
-& $git push
+$currentBranch = (& $git rev-parse --abbrev-ref HEAD)
+& $git push --set-upstream origin $currentBranch
 
 if ($LASTEXITCODE -eq 0) {
     Write-Host "Successfully pushed to GitHub!" -ForegroundColor Green
